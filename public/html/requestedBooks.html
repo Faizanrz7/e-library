@@ -32,7 +32,6 @@
         .box {
             border: 5px solid red;
             padding: 10px;
-            overflow-y: scroll;
         }
 
         .booklist {
@@ -75,10 +74,10 @@
                 </div>
                 <ul class="nav navbar-nav navbar-right">
                 
-                    <li><a href="./"><span class="glyphicon glyphicon-home"></span> HOME</a></li>
+                    <li><a href="./l"><span class="glyphicon glyphicon-home"></span> HOME</a></li>
                     <li><a href="./booklist"><span class="glyphicon glyphicon-book"></span> BOOKS</span></a> </li>
-                    <!-- <li><a href=""><span class="glyphicon glyphicon-user"></span> PROFILE</span></a> </li> -->
-                    <!-- <li><a href=""><span class="glyphicon glyphicon-log-out"></span> LOGOUT</span></a> </li> -->
+                    <li><a href="../adminDashboard"><span class="glyphicon glyphicon-user"></span> DASHBOARD</span></a> </li>
+                    <li><a href=""><span class="glyphicon glyphicon-log-out"></span> LOGOUT</span></a> </li>
                 
                     <li><a href="feedback.html"><span class="glyphicon glyphicon-bookmark"> FEEDBACK</span></a></li>
                 <!-- </li> -->
@@ -86,22 +85,48 @@
             </div>
         </nav>
         <div class="container" style="display: flex; align-items: center; justify-content: center;">
-            <h1 style="font-size: xx-large; font-weight: 900;">List of books</h1>
+            <h1 style="font-size: xx-large; font-weight: 900;">REQUESTED BOOKS</h1>
             <div class="box btn-group-vertical">
                 <!-- <div class="cnt1"> -->
                     <div class="booklist">
-                        <table id="myTable" class="table table-bordered">
+                        <table class="table table-bordered">
                             <thead>
                               <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">Book Name</th>
                                 <th scope="col">Author Name</th>
                                 <th scope="col">Edition</th>
+                                <th scope="col">Issued To</th>
+                                <th scope="col">Issued At</th>
                                 <!-- <th scope="col">Edit</th> -->
                                 <!-- <th scope="col">Delete</th> -->
                               </tr>
                             </thead>
                             <tbody>
+                              <tr>
+                                <th scope="row">1</th>
+                                <td>Mark</td>
+                                <td>Otto</td>
+                                <td>@mdo</td>
+                                <!-- <td><button class="btn btn-info">Edit</button></td> -->
+                                <!-- <td><button class="btn btn-danger">Delete</button></td> -->
+                              </tr>
+                              <tr>
+                                <th scope="row">2</th>
+                                <td>Jacob</td>
+                                <td>Thornton</td>
+                                <td>@fat</td>
+                                <!-- <td><button class="btn btn-info">Edit</button></td> -->
+                                <!-- <td><button class="btn btn-danger">Delete</button></td> -->
+                              </tr>
+                              <tr align="center">
+                                <th scope="row">3</th>
+                                <td>Larry</td>
+                                <td>the Bird</td>
+                                <td>@twitter</td>
+                                <!-- <td><button class="btn btn-info">Edit</button></td> -->
+                                <!-- <td><button class="btn btn-danger">Delete</button></td> -->
+                              </tr>
                             </tbody>
                           </table>
                           
@@ -116,7 +141,7 @@
     </section>
     <script>
         function fetchBooks(done) {
-            $.get('http://localhost:8000/books/getBooks', function(data) {
+            $.get('http://localhost:8000/books/getRequestedBooks', function(data) {
                 done(data)
             })
         }

@@ -62,11 +62,10 @@
                 </div>
                 <ul class="nav navbar-nav navbar-right">
                 
-                    <li><a href="../"><span class="glyphicon glyphicon-home"></span> HOME</a></li>
-                    <li><a href="../booklist"><span class="glyphicon glyphicon-book"></span> BOOKS</span></a> </li>
-                    <!-- <li><a href="../adminDashboard"><span class="glyphicon glyphicon-user"></span> PROFILE</span></a> </li> -->
-                    <li><a href="../adminDashboard"><span class="glyphicon glyphicon-user"></span> DASHBOARD</span></a> </li>
-                    <li><a href="./logout"><span class="glyphicon glyphicon-log-out"></span> LOGOUT</span></a> </li>
+                    <li><a href="index.html"><span class="glyphicon glyphicon-home"></span> HOME</a></li>
+                    <li><a href=""><span class="glyphicon glyphicon-book"></span> BOOKS</span></a> </li>
+                    <li><a href=""><span class="glyphicon glyphicon-user"></span> PROFILE</span></a> </li>
+                    <li><a href=""><span class="glyphicon glyphicon-log-out"></span> LOGOUT</span></a> </li>
                 
                     <li><a href="feedback.html"><span class="glyphicon glyphicon-bookmark"> FEEDBACK</span></a></li>
                 <!-- </li> -->
@@ -76,21 +75,20 @@
         <div class="container" style="display: flex; align-items: center; justify-content: center;">
             <div class="box btn-group-vertical">
                 <!-- <div class="cnt1"> -->
-                    <!-- <form action="http://localhost:8000/books/addBook" method="POST" id="addbook" target="_self"> -->
-                    <form>
+                    <form action="http://localhost:8000/books/addBook" method="POST" id="addbook">
                         <div style="text-align:center; color:whitesmoke;" >
                             <h3>ADD BOOKS IN LIBRARY</h3>
                             <div style="margin-top: 50px;">
                                 <!-- <label for="Request book">Book Name</label>  </label> -->
-                                <input id="bookname" name="bookname" class="form-control" type="text" value=""placeholder="Book Name" required>
+                                <input name="bookname" class="form-control" type="text" value=""placeholder="Book Name" required=>
                             </div>
                             <div>
                                 <!-- <label for="Return date"> Author name </label> -->
-                                <input id="authorname" name="authorname" class="form-control" type="text" value=""placeholder="Author Name" required>
+                                <input name="authorname" class="form-control" type="text" value=""placeholder="Author Name" required>
                             </div>
                             <div>
                                 <!-- <label for="edition"> EDITION </label> -->
-                                <input id="edition" name="edition" class="form-control" type="datetime" value=""placeholder="EDITION"required>
+                                <input name="edition" class="form-control" type="datetime" value=""placeholder="EDITION"required>
                             </div>
                             <div>
                                 <input type="submit" id="submitBtn" class="btn btn-primary" value="ADD">  
@@ -108,55 +106,7 @@
     </section>
     <script>
         // let form = document.getElementById("addbook");
-        let bookname = $('#bookname');
-        let authorname = $('#authorname');
-        let edition = $('#edition');
-        let submitBtn = $('#submitBtn');
-
-
-        function addBook(bookname, authorname, edition, done) {
-            $.post("http://localhost:8000/books/addBook", {
-                    bookname: bookname,
-                    authorname: authorname,
-                    edition: edition
-                }, function(data, status) {
-                    done(data, status)
-                })
-        }
-        submitBtn.click(function() {
-            console.log("clicked")
-            // console.log(bookname.val());
-            addBook(bookname.val(), authorname.val(), edition.val(), function(addedBook, status) {
-                // console.log(Response.status);
-                console.log(status)
-                if(status === 'success')
-                    alert("Added Book to Database")
-                else 
-                    alert("Book already exist")
-            })
-            // $.post("http://localhost:8000/books/addBook", {
-            //         bookname: bookname.val(),
-            //         authorname: authorname.val(),
-            //         edition: edition.val()
-            //     }, function(res) {
-            //         console.log(res.body);
-            //     })
-        });
-
-        //     let data = JSON.stringify({
-        //             bookname: "@gmail.com",
-        //             authorname: "Faizan",
-        //             edition: "2nd"
-        //         });
-        //     $.ajax({
-        //             type: "POST",
-        //             url: "http://localhost:8000/books/addBook",
-        //             data: data,
-        //             error: function(jqXHR, textStatus, err) {
-        //                 alert('text status '+textStatus+', err '+err)
-        //             }
-        //         });
-        // })
+        // let bookname = document.getElementById("bookname");
         // let authorname = document.getElementById("authorname");
         // let edition = document.getElementById("edition");
         // let submitBtn = document.getElementById("submitBtn");
@@ -168,11 +118,10 @@
         //     $.ajax({
         //             type: "POST",
         //             url: "/addBook",
-        //             data: {
-                //     bookname: "@gmail.com",
-                //     authorname: "Faizan",
-                //     edition: "2nd"
-                // },
+        //             data: { mail: "fff" },
+        //             success: function(data) {
+        //             console.log('message', data.message);
+        //             },
         //             error: function(jqXHR, textStatus, err) {
         //                 alert('text status '+textStatus+', err '+err)
         //             }
