@@ -4,7 +4,6 @@
     <meta charset='UTF-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-    <!-- <link rel='stylesheet' href='style.css'> -->
     <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css'>
     <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script>
     <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js'></script>
@@ -65,11 +64,6 @@
                 
                     <li><a href='./'><span class='glyphicon glyphicon-home'></span> HOME</a></li>
                     <li><a href='./booklist'><span class='glyphicon glyphicon-book'></span> BOOKS</span></a> </li>
-                    <!-- <li><a href=''><span class='glyphicon glyphicon-user'></span> PROFILE</span></a> </li> -->
-                    <!-- <li><a href=''><span class='glyphicon glyphicon-log-out'></span> LOGOUT</span></a> </li> -->
-                
-                    <!-- <li><a href='./feedback'><span class='glyphicon glyphicon-bookmark'> FEEDBACK</span></a></li> -->
-                <!-- </li> -->
                 </ul>
             </div>
         </nav>
@@ -79,7 +73,6 @@
                     <h1 style='text-align:center; font-size: 35px; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;'></h1>
                     <h1 style='text-align:center; font: size 25px;'></h1>
                     <h1 style='text-align:center; font: size 25px;'> ADMIN LOGIN</h1>
-                    <!-- <form method='post' action='http://localhost:8000/admin/login' > -->
                     <form>
                         <!-- <div class='login'> -->
                             <input id="username" class='form-control' type='text' name='username' placeholder='username' required> <br>                    
@@ -87,8 +80,6 @@
                             <input id="submitBtn" type='submit' class='btn btn-primary' value='LOGIN' style='border: 2px solid aqua;width:70px; height: 40px;'>  
                         <!-- </div>                 -->
                     </form>
-                    <!-- <a style='color:white' href=''>Forgot password</a> -->
-                    <!-- </p> -->
                 <!-- </div> -->
             </div>
         </div>
@@ -113,17 +104,11 @@
         }
         submitBtn.click(function() {
             console.log("clicked")
-            // console.log(bookname.val());
-            // alert("clicked");
             sendUserforlogin(username.val(), password.val(), function(data, status) {
-                // console.log(Response.status);
-                // alert(status);
-                // alert(data)
                 if(status === 'success'){
                     console.log(data);
                     console.log(status);
                     alert("Admin Signed in successfully")
-                    // $.get('http://localhost:8000/adminDashboard')
                     window.location = '/adminDashboard';
                 }
                 else {

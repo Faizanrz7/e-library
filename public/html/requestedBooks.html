@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <link rel="stylesheet" href="style.css"> -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -40,7 +39,6 @@
             color: white;
         }
         .btn-group-vertical{  
-            /* margin: 100px 550px; */
             width: 900px;
             height: 350px;
             border: 2px solid whitesmoke;
@@ -79,9 +77,6 @@
                     <li><a href="../booklist"><span class="glyphicon glyphicon-book"></span> BOOKS</span></a> </li>
                     <li><a href="../adminDashboard"><span class="glyphicon glyphicon-user"></span> DASHBOARD</span></a> </li>
                     <li><a href="../"><span class="glyphicon glyphicon-log-out"></span> LOGOUT</span></a> </li>
-                
-                    <!-- <li><a href="feedback.html"><span class="glyphicon glyphicon-bookmark"> FEEDBACK</span></a></li> -->
-                <!-- </li> -->
                 </ul>
             </div>
         </nav>
@@ -97,10 +92,6 @@
                                 <th scope="col">Book Name</th>
                                 <th scope="col">Author Name</th>
                                 <th scope="col">Category</th>
-                                <!-- <th scope="col">Edition</th> -->
-                                <!-- <th scope="col">Issued At</th> -->
-                                <!-- <th scope="col">Edit</th> -->
-                                <!-- <th scope="col">Delete</th> -->
                               </tr>
                             </thead>
                             <tbody>
@@ -124,7 +115,6 @@
         }
 
         function createBookList(i, book) {
-            console.log("pahuncha");
             return $(`<tr>
                                 <th scope="row">${i}</th>
                                 <td>${book.bookname}</td>
