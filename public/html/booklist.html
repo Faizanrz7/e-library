@@ -32,7 +32,7 @@
         .box {
             border: 5px solid red;
             padding: 10px;
-            overflow-y: scroll;
+            overflow-y: auto;
         }
 
         .booklist {
@@ -76,11 +76,11 @@
                 <ul class="nav navbar-nav navbar-right">
                 
                     <li><a href="./"><span class="glyphicon glyphicon-home"></span> HOME</a></li>
-                    <li><a href="./booklist"><span class="glyphicon glyphicon-book"></span> BOOKS</span></a> </li>
+                    <!-- <li><a href="./booklist"><span class="glyphicon glyphicon-book"></span> BOOKS</span></a> </li> -->
                     <!-- <li><a href=""><span class="glyphicon glyphicon-user"></span> PROFILE</span></a> </li> -->
                     <!-- <li><a href=""><span class="glyphicon glyphicon-log-out"></span> LOGOUT</span></a> </li> -->
                 
-                    <li><a href="feedback.html"><span class="glyphicon glyphicon-bookmark"> FEEDBACK</span></a></li>
+                    <li><a href="./feedback"><span class="glyphicon glyphicon-bookmark"> FEEDBACK</span></a></li>
                 <!-- </li> -->
                 </ul>
             </div>
@@ -96,7 +96,8 @@
                                 <th scope="col">#</th>
                                 <th scope="col">Book Name</th>
                                 <th scope="col">Author Name</th>
-                                <th scope="col">Edition</th>
+                                <th scope="col">Category</th>
+                                <th scope="col">Download</th>
                                 <!-- <th scope="col">Edit</th> -->
                                 <!-- <th scope="col">Delete</th> -->
                               </tr>
@@ -126,7 +127,8 @@
                                 <th scope="row">${i}</th>
                                 <td>${book.name}</td>
                                 <td>${book.author}</td>
-                                <td>${book.Edition}</td>
+                                <td>${book.category}</td>
+                                <td><a href="${book.link}" class="downloadBtn"><button class="btn btn-success">Download</button></a></td>
                         </tr>`
                     )
         }

@@ -34,6 +34,7 @@
             opacity: .7;
             color:white;
             padding: 20px;
+            overflow: auto;
         }
 
 
@@ -74,7 +75,7 @@
                     <!-- <li><a href=""><span class="glyphicon glyphicon-user"></span> PROFILE</span></a> </li> -->
                     <!-- <li><a href="../"><span class="glyphicon glyphicon-log-out"></span> LOGOUT</span></a> </li> -->
                 
-                    <li><a href="../feedback"><span class="glyphicon glyphicon-bookmark"> FEEDBACK</span></a></li>
+                    <!-- <li><a href="feedback.html"><span class="glyphicon glyphicon-bookmark"> FEEDBACK</span></a></li> -->
                 <!-- </li> -->
                 </ul>
             </div>
@@ -84,26 +85,18 @@
                 <!-- <div class="cnt1"> -->
                     <form>
                         <div style="text-align:center; color:whitesmoke;" >
-                            <h3>Request a Book</h3>
+                            <h3>FEEDBACK</h3>
                         </div>
                         <div>
                             <!-- <label for="Request book">Book Name</label>  </label> -->
-                            <input id="bookname" class="form-control" type="text" placeholder="Book Name" required>
+                            <input id="username" class="form-control" type="text" placeholder="Your Name" required>
                         </div>
                         <div>
                             <!-- <label for="Return date"> Author name </label> -->
-                            <input id="authorname" class="form-control" type="text" placeholder="Author Name" required>
+                            <textarea id="feedback" class="form-control" type="text-are" placeholder="Author Name" required></textarea>
                         </div>
                         <div>
-                            <select id="category" class="form-control" name="category" id="category">
-                                <option selected>Category</option>
-                                <option value="Fiction">Fiction</option>
-                                <option value="Non Fiction">Non Fiction</option>
-                                <option value="Horror">Horror</option>
-                            </select>
-                        </div>
-                        <div>
-                            <input id="submitBtn" type="button" class="btn btn-primary" value="Request">  
+                            <input id="submitBtn" type="button" class="btn btn-primary" value="Send">  
                         </div>
                     </form>
                 <!-- </div> -->
@@ -115,17 +108,15 @@
 
     </section>
     <script>
-        let bookname = $('#bookname');
-        let authorname = $('#authorname');
-        let category = $('#category');
+        let username = $('#username');
+        let feedback = $('#feedback');
         let submitBtn = $('#submitBtn');
 
 
-        function requestBook(bookname, authorname,category, done) {
-            $.post("http://localhost:8000/books/requestBook", {
-                    bookname: bookname,
-                    authorname: authorname,
-                    category: category
+        function sendFeedback(username, feedback, done) {
+            $.post("http://localhost:8000/feedback", {
+                    username: username,
+                    feedback: feedback
                 }, function(data, status) {
                     done(data, status)
                 })
@@ -133,20 +124,17 @@
 
         submitBtn.click(function() {
             // console.log("clicked")
-            console.log(category.val());
-            if(bookname.val() == "" || authorname.val() == ""){
+            console.log(feedback.val());
+            if(username.val() == "" || feedback.val() == ""){
                 alert("All field should be filled");
-            }
-            else if(category.val() == 'Category'){
-                alert("Choose Category");
             }
             else {
                 // alert("clicked");
-                requestBook(bookname.val(), authorname.val(),category.val(), function(addedBook, status) {
+                sendFeedback(username.val(), feedback.val(), function(feedback, status) {
                     // console.log(Response.status);
                     console.log(status)
                     if(status === 'success')
-                        alert("Book Requested")
+                        alert("Feedback Sent")
                     else 
                         alert("Requesting Failed")
                 })

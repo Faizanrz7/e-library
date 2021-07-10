@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <link rel="stylesheet" href="style.css"> -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
-    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <title>Document</title>
     <style>
         nav {
@@ -34,11 +34,15 @@
             opacity: .7;
             color:white;
             padding: 20px;
+            overflow: auto;
+        }
+        input {
+            margin: 20px 0;
         }
 
         .btn-group-vertical{  
             margin: 100px 550px;
-            width: 300px;
+            width: 350px;
             height: 350px;
             border: 2px solid purple;
             box-shadow:-5px  -5px;
@@ -69,7 +73,7 @@
                     <li><a href="../adminDashboard"><span class="glyphicon glyphicon-user"></span> DASHBOARD</span></a> </li>
                     <li><a href="../"><span class="glyphicon glyphicon-log-out"></span> LOGOUT</span></a> </li>
                 
-                    <li><a href="feedback.html"><span class="glyphicon glyphicon-bookmark"> FEEDBACK</span></a></li>
+                    <!-- <li><a href="feedback.html"><span class="glyphicon glyphicon-bookmark"> FEEDBACK</span></a></li> -->
                 <!-- </li> -->
                 </ul>
             </div>
@@ -77,21 +81,22 @@
         <div class="container" style="display: flex; align-items: center; justify-content: center;">
             <div class="box btn-group-vertical">
                 <!-- <div class="cnt1"> -->
-                    <form action="">
+                    <form>
+                        <h1>Change Password</h1>
                         <div>
-                            <label for="change password">Enter old Password</label>
-                            <input  class="form-control" type="password" value=""placeholder="old password"required="" >
+                            <!-- <label for="changepassword">Enter old Password</label> -->
+                            <input id="oldPass" class="form-control" type="password" value=""placeholder="old password"required>
                         </div>
                         <div>
-                            <label for="change password">Enter New Password</label>
-                            <input  class="form-control" type="password" value=""placeholder="New password"required="" >
+                            <!-- <label  for="changepassword">Enter New Password</label> -->
+                            <input id="newPass" class="form-control" type="password" value=""placeholder="New password"required>
                         </div>
                         <div>
-                            <label for="change password">Confirm Your Password</label>
-                            <input  class="form-control" type="password" value=""placeholder="Confirm password"required="" >
+                            <!-- <label  for="change password">Confirm Your Password</label> -->
+                            <input id="confrPass" class="form-control" type="password" value=""placeholder="Confirm password"required>
                         </div>
                         <div>
-                            <input type="button" class="btn btn-primary" style="margin-top: 10px;" value="Update">  
+                            <input id="submitBtn" type="submit" class="btn btn-primary" style="margin-top: 10px;" value="Update">  
                         </div>
                     </form> 
                 <!-- </div> -->
@@ -102,6 +107,108 @@
         </footer>
 
     </section>
-    
+    <script>
+        let oldPass = $('#oldPass');
+        let newPass = $('#newPass');
+        let confrPass = $('#confrPass');
+        let submitBtn = $('#submitBtn');
+
+
+        function changePass(oldPass, newPass, done) {
+            // $.post("http://localhost:8000/admin/changePass", {
+            //         oldPass: oldPass,
+            //         newPass: newPass
+            //     }, function(data, status) {
+            //         done(data, status)
+            //     })
+                // .then(results => {
+                //     alert("Suceeeeeeeded");
+                // })
+                data = {
+                    oldPass: oldPass,
+                    newPass: newPass
+                }
+                fetch('http://localhost:8000/admin/changePass', {
+                        method: 'POST', // or 'PUT'
+                        headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                        },
+                        body: JSON.stringify(data),
+                })
+                .then(response =>{
+                    // alert(response.status);
+                    if(response.status === 201){
+                        // alert("Password Changed")
+                        // window.location = '/adminDashboard';
+                    }
+                    else {
+                        alert("Invalid Credentials");
+                    }
+                    window.location = '/adminLogin';
+                    // response.json();
+                    // $.get('http://localhost:8000/adminLogin')
+                }).catch(err => {
+                    alert("Password Changed");
+                    // alert("Password"+err);
+                    window.location = '/adminLogin';
+                }); 
+                // .then(data => {
+                //     console.log('Success:', JSON.stringify(data));
+                //     alert(data);
+                // })
+                // .catch((error) => {
+                //     // console.error('Error:', error);
+                //     alert("Pass Changed");
+                // });
+                
+                // .then(res => {
+                //     alert(res.status);
+                //     res.json();
+                // }).then(d => {
+                //     console.log(typeof(d));
+                //     alert(d);
+                //     alert(res.status);
+                // })
+        }
+
+
+
+        submitBtn.click(function() {
+            console.log("clicked")
+            // console.log(bookname.val());
+            console.log("new: "+ newPass.val());
+            console.log("new: "+ confrPass.val());
+            // alert("wait");
+
+            if(newPass.val() == confrPass.val()){
+                //Procee
+                changePass(oldPass.val(), newPass.val(), function (data , status) {
+                // for(book in books) {
+                    console.log(data);
+                    alert(data);
+                    if(parseInt(data) == 1){
+                        alert("Password Changed");
+                    }
+                    else {
+                        alert("Admin Not Found");
+                    }
+                    // tableBody.append(createBookList(parseInt(book)+1, books[book]))
+                // }
+
+                })
+            }
+            else {
+                alert("Password Does not Match")
+            }
+            // addBook(bookname.val(), authorname.val(), edition.val(), function(addedBook, status) {
+            //     // console.log(Response.status);
+            //     console.log(status)
+            //     if(status === 'success')
+            //         alert("Added Book to Database")
+            //     else 
+            //         alert("Book already exist")
+            });
+    </script>
 </body>
 </html>

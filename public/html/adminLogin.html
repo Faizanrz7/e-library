@@ -68,7 +68,7 @@
                     <!-- <li><a href=''><span class='glyphicon glyphicon-user'></span> PROFILE</span></a> </li> -->
                     <!-- <li><a href=''><span class='glyphicon glyphicon-log-out'></span> LOGOUT</span></a> </li> -->
                 
-                    <li><a href='feedback.html'><span class='glyphicon glyphicon-bookmark'> FEEDBACK</span></a></li>
+                    <!-- <li><a href='./feedback'><span class='glyphicon glyphicon-bookmark'> FEEDBACK</span></a></li> -->
                 <!-- </li> -->
                 </ul>
             </div>
@@ -114,11 +114,11 @@
         submitBtn.click(function() {
             console.log("clicked")
             // console.log(bookname.val());
-            alert("clicked");
+            // alert("clicked");
             sendUserforlogin(username.val(), password.val(), function(data, status) {
                 // console.log(Response.status);
                 // alert(status);
-                alert(data)
+                // alert(data)
                 if(status === 'success'){
                     console.log(data);
                     console.log(status);

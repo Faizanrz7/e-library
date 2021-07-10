@@ -48,6 +48,53 @@ router.get('/requestedBooks', (req, res) => {
 
 })
 
+router.get('/getRequestedBooks', (req, res) => {
+    var query1 = `SELECT * FROM REQUESTED`;
+    db.query(query1, function(err, books) {
+        if(err)
+            throw err;
+        if(Object.keys(books).length === 0)
+            res.status(401).json("Nothing present");
+        else {
+                // console.log(books)
+                res.status(200).json(books);
+                // alert user registerd and render login page
+            // })
+        }
+
+    })
+    // res.json(books);
+})
+
+router.get('/requestBook', (req, res) => {
+    // res.sendFile()
+    return res.sendFile(path.join(__dirname, '../html/requestMine.html')); 
+
+})
+
+router.post('/requestBook', (req, res) => {
+    let bookName = req.body.bookname;
+    let authorName = req.body.authorname;
+    let category = req.body.category;
+
+    // console.log(req.body);
+
+    var query2 = `INSERT INTO REQUESTED VALUES ('${bookName}','${authorName}','${category}')`;
+    
+    db.query(query2, function(err, book) {
+        if (err) {
+            res.status(405);
+        }
+        // console.log(path.join(__dirname , '../html/UserLoginMine.html'));
+        // return res.sendFile(path.join(__dirname, '../html/UserLoginMine.html')); 
+        res.status(201).json(book);
+        // res.status(200).sendFile(path.join(__dirname, '../html/addBookMine.html'));
+        
+
+        // alert user registerd and render login page
+    })
+})
+
 
 router.post('/addBook', (req, res) => {
     //add book to the database
@@ -55,7 +102,8 @@ router.post('/addBook', (req, res) => {
     // console.log(req.body);
     let bookName = req.body.bookname;
     let authorName = req.body.authorname;
-    let edition = req.body.edition;
+    let category = req.body.category;
+    let link = req.body.link;
     // console.log(bookName);
     // console.log(authorName);
 
@@ -73,13 +121,13 @@ router.post('/addBook', (req, res) => {
 
         }
         else {
-            var query2 = `INSERT INTO BOOKS VALUES ('${bookName}','${authorName}', '${edition}')`;
+            var query2 = `INSERT INTO BOOKS VALUES ('${bookName}','${authorName}','${category}', '${link}')`;
     
             db.query(query2, function(err, book) {
                 if (err) {
                     res.status(405);
                 }
-                console.log(path.join(__dirname , '../html/UserLoginMine.html'));
+                // console.log(path.join(__dirname , '../html/UserLoginMine.html'));
                 // return res.sendFile(path.join(__dirname, '../html/UserLoginMine.html')); 
                 res.status(201).json(book);
                 // res.status(200).sendFile(path.join(__dirname, '../html/addBookMine.html'));

@@ -41,16 +41,26 @@ app.route('/adminDashboard').get(function(req, res) {
     return res.sendFile(path.join(__dirname, '/public/html/adminDashMine.html')); 
 });
 
-app.post('/test', function(req, res) {
-    console.log("test");
+// app.post('/test', function(req, res) {
+//     console.log("test");
+// })///
+app.get('/feedback', function(req, res) {
+    return res.sendFile(path.join(__dirname, '/public/html/giveFeedback.html')); 
 })
 
-// app.post('/admin/login', (req, res) => {
-//     //handle login of user
-//     console.log(req.body.username);
-//     //render dashboard
-//     res.send("pahuyhahumaincha");
-// })
+app.post('/feedback', function(req, res) {
+    let username = req.body.username;
+    let feedback = req.body.feedback;
+
+    var query2 = `INSERT INTO FEEDBACKS VALUES ('${username}','${feedback}')`;
+    
+            db.query(query2, function(err, book) {
+                if (err) {
+                    res.status(405);
+                }
+                res.status(201).json(book);
+            })
+})
 
 app.use('/users', require('./public/routes/user'));
 app.use('/admin', require('./public/routes/admin'));
