@@ -4,11 +4,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <link rel="stylesheet" href="style.css"> -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
-    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
-    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <title>Change Password</title>
     <style>
         nav {
             background-color: black;
@@ -34,11 +33,15 @@
             opacity: .7;
             color:white;
             padding: 20px;
+            overflow: auto;
+        }
+        input {
+            margin: 20px 0;
         }
 
         .btn-group-vertical{  
             margin: 100px 550px;
-            width: 300px;
+            width: 350px;
             height: 350px;
             border: 2px solid purple;
             box-shadow:-5px  -5px;
@@ -63,34 +66,29 @@
                 </div>
                 <ul class="nav navbar-nav navbar-right">
                 
-                    <li><a href="index.html"><span class="glyphicon glyphicon-home"></span> HOME</a></li>
-                    <li><a href=""><span class="glyphicon glyphicon-book"></span> BOOKS</span></a> </li>
-                    <li><a href=""><span class="glyphicon glyphicon-user"></span> PROFILE</span></a> </li>
-                    <li><a href=""><span class="glyphicon glyphicon-log-out"></span> LOGOUT</span></a> </li>
-                
-                    <li><a href="feedback.html"><span class="glyphicon glyphicon-bookmark"> FEEDBACK</span></a></li>
-                <!-- </li> -->
+                    <li><a href="../"><span class="glyphicon glyphicon-home"></span> HOME</a></li>
+                    <li><a href="../booklist"><span class="glyphicon glyphicon-book"></span> BOOKS</span></a> </li>
+                    <li><a href="../adminDashboard"><span class="glyphicon glyphicon-user"></span> DASHBOARD</span></a> </li>
+                    <li><a href="../"><span class="glyphicon glyphicon-log-out"></span> LOGOUT</span></a> </li>
                 </ul>
             </div>
         </nav>
         <div class="container" style="display: flex; align-items: center; justify-content: center;">
             <div class="box btn-group-vertical">
                 <!-- <div class="cnt1"> -->
-                    <form action="">
+                    <form>
+                        <h1>Change Password</h1>
                         <div>
-                            <label for="change password">Enter old Password</label>
-                            <input  class="form-control" type="password" value=""placeholder="old password"required="" >
+                            <input id="oldPass" class="form-control" type="password" value=""placeholder="Old password"required>
                         </div>
                         <div>
-                            <label for="change password">Enter New Password</label>
-                            <input  class="form-control" type="password" value=""placeholder="New password"required="" >
+                            <input id="newPass" class="form-control" type="password" value=""placeholder="New password"required>
                         </div>
                         <div>
-                            <label for="change password">Confirm Your Password</label>
-                            <input  class="form-control" type="password" value=""placeholder="Confirm password"required="" >
+                            <input id="confrPass" class="form-control" type="password" value=""placeholder="Confirm password"required>
                         </div>
                         <div>
-                            <input type="button" class="btn btn-primary" style="margin-top: 10px;" value="Update">  
+                            <input id="submitBtn" type="submit" class="btn btn-primary" style="margin-top: 10px;" value="Update">  
                         </div>
                     </form> 
                 <!-- </div> -->
@@ -101,6 +99,65 @@
         </footer>
 
     </section>
-    
+    <script>
+        let oldPass = $('#oldPass');
+        let newPass = $('#newPass');
+        let confrPass = $('#confrPass');
+        let submitBtn = $('#submitBtn');
+
+
+        function changePass(oldPass, newPass, done) {
+                data = {
+                    oldPass: oldPass,
+                    newPass: newPass
+                }
+                fetch('http://localhost:8000/admin/changePass', {
+                        method: 'POST', // or 'PUT'
+                        headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                        },
+                        body: JSON.stringify(data),
+                })
+                .then(response =>{
+                    // alert(response.status);
+                    if(response.status === 201){
+                        // alert("Password Changed")
+                        // window.location = '/adminDashboard';
+                    }
+                    else {
+                        alert("Invalid Credentials");
+                    }
+                    window.location = '/adminLogin';
+                }).catch(err => {
+                    alert("Password Changed");
+                    window.location = '/adminLogin';
+                }); 
+        }
+
+
+
+        submitBtn.click(function() {
+            console.log("clicked")
+            console.log("new: "+ newPass.val());
+            console.log("new: "+ confrPass.val());
+
+            if(newPass.val() == confrPass.val()){
+                changePass(oldPass.val(), newPass.val(), function (data , status) {
+                    console.log(data);
+                    alert(data);
+                    if(parseInt(data) == 1){
+                        alert("Password Changed");
+                    }
+                    else {
+                        alert("Admin Not Found");
+                    }
+                })
+            }
+            else {
+                alert("Password Does not Match")
+            }
+        });
+    </script>
 </body>
 </html>

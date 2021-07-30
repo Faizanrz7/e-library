@@ -4,11 +4,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <link rel="stylesheet" href="style.css"> -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
-    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
-    <title>Library Management System</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <title>E-Library</title>
     <style>
         nav {
             background-color: black;
@@ -27,14 +26,6 @@
             background-size: cover;
         }
         .box {
-            /* border: 5px solid red;
-            padding: 5px;
-            text-align: center;
-            background-color: black;
-            opacity: .7;
-            color:white;
-            padding: 20px; */
-
             height:70px;
             width: 800px;
             border: 1px solid white;
@@ -42,14 +33,6 @@
             margin: 110px auto;
             color:white;
         }
-
-        /* .btn-group-vertical{  
-            margin: 100px 550px;
-            width: 300px;
-            height: 350px;
-            border: 2px solid purple;
-            box-shadow:-5px  -5px;
-        } */
 
         .btn-group-vertical a{
             margin:40px 0px;
@@ -70,22 +53,17 @@
                 </div>
                 <ul class="nav navbar-nav navbar-right">
                 
-                    <li><a href="#"><span class="glyphicon glyphicon-home"></span> HOME</a></li>
-                    <li><a href="#"><span class="glyphicon glyphicon-home"></span> USER LOGIN</a></li>
-                    <li><a href="#"><span class="glyphicon glyphicon-home"></span> ADMIN LOGIN</a></li>
-                    <li><a href=""><span class="glyphicon glyphicon-book"></span> BOOKS</span></a> </li>
-                    <!-- <li><a href=""><span class="glyphicon glyphicon-user"></span> PROFILE</span></a> </li> -->
-                    <!-- <li><a href=""><span class="glyphicon glyphicon-log-out"></span> LOGOUT</span></a> </li> -->
-                
-                    <li><a href="feedback.html"><span class="glyphicon glyphicon-bookmark"> FEEDBACK</span></a></li>
-                <!-- </li> -->
+                    <li><a href="/"><span class="glyphicon glyphicon-home"></span> HOME</a></li>
+                    <li><a href="./adminLogin"><span class="glyphicon glyphicon-home"></span> ADMIN LOGIN</a></li>
+                    <li><a href="./booklist"><span class="glyphicon glyphicon-book"></span> BOOKS</span></a> </li>
+                    <li><a href="./books/requestBook"><span class="glyphicon glyphicon-plus"></span> Request Book</a></li>
+                    <li><a href="./feedback"><span class="glyphicon glyphicon-bookmark"> FEEDBACK</span></a></li>
                 </ul>
             </div>
         </nav>
         <div class="container" style="display: flex; align-items: center; justify-content: center;">
             <div class="box btn-group-vertical">
                 <h1 style="text-align:center;"> Welcome to E-LIBRARY</h1>
-                <!-- </div> -->
             </div>
         </div>
         <footer>

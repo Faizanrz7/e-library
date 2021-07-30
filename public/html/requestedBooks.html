@@ -4,11 +4,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <link rel="stylesheet" href="style.css"> -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <title>Document</title>
+    <title>Requested Books</title>
     <style>
         nav {
             background-color: black;
@@ -32,6 +31,7 @@
         .box {
             border: 5px solid red;
             padding: 10px;
+            overflow-y: auto;
         }
 
         .booklist {
@@ -39,7 +39,6 @@
             color: white;
         }
         .btn-group-vertical{  
-            /* margin: 100px 550px; */
             width: 900px;
             height: 350px;
             border: 2px solid whitesmoke;
@@ -74,57 +73,28 @@
                 </div>
                 <ul class="nav navbar-nav navbar-right">
                 
-                    <li><a href="index.html"><span class="glyphicon glyphicon-home"></span> HOME</a></li>
-                    <li><a href=""><span class="glyphicon glyphicon-book"></span> BOOKS</span></a> </li>
-                    <li><a href=""><span class="glyphicon glyphicon-user"></span> PROFILE</span></a> </li>
-                    <li><a href=""><span class="glyphicon glyphicon-log-out"></span> LOGOUT</span></a> </li>
-                
-                    <li><a href="feedback.html"><span class="glyphicon glyphicon-bookmark"> FEEDBACK</span></a></li>
-                <!-- </li> -->
+                    <li><a href="../"><span class="glyphicon glyphicon-home"></span> HOME</a></li>
+                    <li><a href="../booklist"><span class="glyphicon glyphicon-book"></span> BOOKS</span></a> </li>
+                    <li><a href="../adminDashboard"><span class="glyphicon glyphicon-user"></span> DASHBOARD</span></a> </li>
+                    <li><a href="../"><span class="glyphicon glyphicon-log-out"></span> LOGOUT</span></a> </li>
                 </ul>
             </div>
         </nav>
         <div class="container" style="display: flex; align-items: center; justify-content: center;">
-            <h1 style="font-size: xx-large; font-weight: 900;">Returned books</h1>
+            <h1 style="font-size: xx-large; font-weight: 900;">REQUESTED BOOKS</h1>
             <div class="box btn-group-vertical">
                 <!-- <div class="cnt1"> -->
                     <div class="booklist">
-                        <table class="table table-bordered">
+                        <table id="myTable" class="table table-bordered">
                             <thead>
                               <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">Book Name</th>
                                 <th scope="col">Author Name</th>
-                                <th scope="col">Edition</th>
-                                <!-- <th scope="col">Edit</th> -->
-                                <!-- <th scope="col">Delete</th> -->
+                                <th scope="col">Category</th>
                               </tr>
                             </thead>
                             <tbody>
-                              <tr>
-                                <th scope="row">1</th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                                <!-- <td><button class="btn btn-info">Edit</button></td> -->
-                                <!-- <td><button class="btn btn-danger">Delete</button></td> -->
-                              </tr>
-                              <tr>
-                                <th scope="row">2</th>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>@fat</td>
-                                <!-- <td><button class="btn btn-info">Edit</button></td> -->
-                                <!-- <td><button class="btn btn-danger">Delete</button></td> -->
-                              </tr>
-                              <tr align="center">
-                                <th scope="row">3</th>
-                                <td>Larry</td>
-                                <td>the Bird</td>
-                                <td>@twitter</td>
-                                <!-- <td><button class="btn btn-info">Edit</button></td> -->
-                                <!-- <td><button class="btn btn-danger">Delete</button></td> -->
-                              </tr>
                             </tbody>
                           </table>
                           
@@ -137,6 +107,33 @@
         </footer>
 
     </section>
-    
+    <script>
+        function fetchBooks(done) {
+            $.get('http://localhost:8000/books/getRequestedBooks', function(data) {
+                done(data)
+            })
+        }
+
+        function createBookList(i, book) {
+            return $(`<tr>
+                                <th scope="row">${i}</th>
+                                <td>${book.bookname}</td>
+                                <td>${book.authorname}</td>
+                                <td>${book.category}</td>
+                        </tr>`
+                    )
+        }
+
+        $(function () {
+            let tableBody = $('#myTable').find('tbody');
+            fetchBooks(function (books) {
+                for(book in books) {
+                    console.log(books[book]);
+                    tableBody.append(createBookList(parseInt(book)+1, books[book]))
+                }
+
+            })
+        })
+    </script>
 </body>
 </html>

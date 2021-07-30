@@ -4,11 +4,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <link rel="stylesheet" href="style.css"> -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <title>Document</title>
+    <title>Books List</title>
     <style>
         nav {
             background-color: black;
@@ -32,6 +31,7 @@
         .box {
             border: 5px solid red;
             padding: 10px;
+            overflow-y: auto;
         }
 
         .booklist {
@@ -39,7 +39,6 @@
             color: white;
         }
         .btn-group-vertical{  
-            /* margin: 100px 550px; */
             width: 900px;
             height: 350px;
             border: 2px solid whitesmoke;
@@ -74,13 +73,8 @@
                 </div>
                 <ul class="nav navbar-nav navbar-right">
                 
-                    <li><a href="index.html"><span class="glyphicon glyphicon-home"></span> HOME</a></li>
-                    <li><a href=""><span class="glyphicon glyphicon-book"></span> BOOKS</span></a> </li>
-                    <li><a href=""><span class="glyphicon glyphicon-user"></span> PROFILE</span></a> </li>
-                    <li><a href=""><span class="glyphicon glyphicon-log-out"></span> LOGOUT</span></a> </li>
-                
-                    <li><a href="feedback.html"><span class="glyphicon glyphicon-bookmark"> FEEDBACK</span></a></li>
-                <!-- </li> -->
+                    <li><a href="./"><span class="glyphicon glyphicon-home"></span> HOME</a></li>
+                    <li><a href="./feedback"><span class="glyphicon glyphicon-bookmark"> FEEDBACK</span></a></li>
                 </ul>
             </div>
         </nav>
@@ -95,7 +89,8 @@
                                 <th scope="col">#</th>
                                 <th scope="col">Book Name</th>
                                 <th scope="col">Author Name</th>
-                                <th scope="col">Edition</th>
+                                <th scope="col">Category</th>
+                                <th scope="col">Download</th>
                                 <!-- <th scope="col">Edit</th> -->
                                 <!-- <th scope="col">Delete</th> -->
                               </tr>
@@ -125,9 +120,8 @@
                                 <th scope="row">${i}</th>
                                 <td>${book.name}</td>
                                 <td>${book.author}</td>
-                                <td>${book.Edition}</td>
-                                <!-- <td><button class="btn btn-info">Edit</button></td> -->
-                                <!-- <td><button class="btn btn-danger">Delete</button></td> -->
+                                <td>${book.category}</td>
+                                <td><a href="${book.link}" class="downloadBtn"><button class="btn btn-success">Download</button></a></td>
                         </tr>`
                     )
         }
@@ -136,7 +130,6 @@
             let tableBody = $('#myTable').find('tbody');
             fetchBooks(function (books) {
                 for(book in books) {
-                    // console.log(books[book]);
                     tableBody.append(createBookList(parseInt(book)+1, books[book]))
                 }
 
