@@ -28,10 +28,7 @@ router.get('/addBook', (req, res) => {
     return res.sendFile(path.join(__dirname, '../html/addBookMine.html')); 
 
 })
-router.get('/issuedBookAdmin', (req, res) => {
-    return res.sendFile(path.join(__dirname, '../html/issuedBookAdmin.html')); 
 
-})
 router.get('/requestedBooks', (req, res) => {
     return res.sendFile(path.join(__dirname, '../html/requestedBooks.html')); 
 

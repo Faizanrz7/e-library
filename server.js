@@ -14,6 +14,8 @@ app.use(cors());
 app.use(express.static(__dirname+'/public'));
 app.use(cookieParser());
 app.use(express.json());
+
+
 app.get('/', function (req, res) {
     res.sendFile(path.join(__dirname + '/public/html/indexMine.html'));
 })
@@ -39,11 +41,11 @@ app.post('/feedback', function(req, res) {
 
     var query2 = `INSERT INTO FEEDBACKS VALUES ('${username}','${feedback}')`;
     
-            db.query(query2, function(err, book) {
+            db.query(query2, function(err, feedback) {
                 if (err) {
                     res.status(405);
                 }
-                res.status(201).json(book);
+                res.status(201).json(feedback);
             })
 })
 

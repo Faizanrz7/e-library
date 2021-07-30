@@ -44,6 +44,8 @@ router.get('/changePassword', (req, res) => {
     return res.sendFile(path.join(__dirname, '../html/passchangeMine.html')); 
 
 })
+
+
 router.post('/changePass', (req, res) => {
     changePassword(req.body.oldPass, req.body.newPass, function(user) {
         if(user.changedRows == 1){
@@ -56,6 +58,8 @@ router.post('/changePass', (req, res) => {
         }
     })
 })
+
+
 router.get('/feedbacks', (req, res) => {
     return res.sendFile(path.join(__dirname, '../html/feedbackslist.html')); 
 
@@ -74,18 +78,6 @@ router.get('/getFeedbacks', (req, res) => {
 
     })
 })
-router.get('./getRequesteBooks', (req, res) => {
-    var query1 = `SELECT * FROM REQUESTED`;
-    db.query(query1, function(err, books) {
-        if(err)
-            throw err;
-        if(Object.keys(books).length === 0)
-            res.status(401).json("Nothing present");
-        else {
-                res.status(200).json(books);
-        }
 
-    })
-})
 
 module.exports = router;
